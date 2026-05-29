@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SledGame from './components/SledGame';
 import { GameProvider, useGame } from './store/GameContext';
 import HUD from './components/HUD';
 import DoeClickable from './components/DoeClickable';
@@ -110,7 +111,7 @@ function GameUI() {
   );
 }
 
-export default function App() {
+function DoeApp() {
   const [introDone, setIntroDone] = useState(() => {
     return localStorage.getItem('doe-intro-seen') === '1';
   });
@@ -126,4 +127,11 @@ export default function App() {
       <GameUI />
     </GameProvider>
   );
+}
+
+export default function App() {
+  if (window.location.pathname === '/sled') {
+    return <SledGame />;
+  }
+  return <DoeApp />;
 }
